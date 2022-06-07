@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Stars } from "@react-three/drei";
+import { Physics } from "@react-three/cannon";
+import Sphere from "./components/sphere";
+import Plane from "./components/plane";
 
-function App() {
+const App = () => {
+  const CanvasStyle: React.CSSProperties = { height: "100vh" };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Canvas style={CanvasStyle} camera={{ fov: 75, position: [10, 20, 10] }}>
+      <Stars />
+      <ambientLight intensity={0.5} />
+      <spotLight position={[10, 30, 10]} angle={0.5} />
+      <OrbitControls />
+      <Physics>
+        <Sphere />
+        <Plane />
+      </Physics>
+    </Canvas>
   );
-}
+};
 
 export default App;
